@@ -10,6 +10,8 @@ namespace srrdb.dbo.Account
 
         //relations
         public ICollection<Srr> Srr { get; set; }
+
+        public ICollection<Activity> Activity { get; set; }
     }
 
     public class ApplicationRole : IdentityRole<int>

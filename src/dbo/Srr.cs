@@ -8,7 +8,7 @@ namespace srrdb.dbo
     {
         public int Id { get; set; }
 
-        public DateTime UploadedAt { get; set; } //should it be ulong for unix?
+        public DateTime UploadedAt { get; set; }
 
         public bool HasNfo { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace srrdb.dbo
@@ -6,6 +7,8 @@ namespace srrdb.dbo
     public class Release
     {
         public int Id { get; set; }
+
+        public DateTime AddedAt { get; set; }
 
         public string Title { get; set; } //release name, unique
 
@@ -22,5 +25,7 @@ namespace srrdb.dbo
         public ICollection<SrrFileStore> SrrFileStore { get; set; }
 
         public ICollection<ReleaseTag> ReleaseTag { get; set; }
+
+        public ICollection<Activity> Activity { get; set; }
     }
 }

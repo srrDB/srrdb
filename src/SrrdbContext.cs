@@ -26,8 +26,9 @@ namespace srrdb
         public DbSet<Srr> Srr { get; set; }
         public DbSet<File> File { get; set; }
         public DbSet<Tag> Tag { get; set; }
-
         public DbSet<ReleaseTag> ReleaseTag { get; set; }
+        public DbSet<Activity> Activity { get; set; }
+        public DbSet<ActivityType> ActivityType { get; set; }
 
         //srr/file relations
         public DbSet<SrrFileArchive> SrrFileArchive { get; set; }
@@ -72,14 +73,6 @@ namespace srrdb
             builder.Entity<ApplicationRoleClaim>(entity => entity.HasKey(x => x.Id));
             builder.Entity<ApplicationUserClaim>(entity => entity.HasKey(x => x.Id));
             builder.Entity<ApplicationUserToken>(entity => entity.HasKey(x => x.UserId));
-
-            builder.Entity<ApplicationUser>(i =>
-            {
-                i.Property(o => o.EmailConfirmed).HasConversion<int>();
-                i.Property(o => o.LockoutEnabled).HasConversion<int>();
-                i.Property(o => o.PhoneNumberConfirmed).HasConversion<int>();
-                i.Property(o => o.TwoFactorEnabled).HasConversion<int>();
-            });
 
             //custom
             builder.Entity<Release>()
