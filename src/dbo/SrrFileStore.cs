@@ -8,7 +8,7 @@
         public int FileId { get; set; }
         public File File { get; set; }
 
-        public int ReleaseId { get; set; }
-        public Release Release { get; set; }
+        public int SrrId { get; set; }
+        public Srr Srr { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace srrdb.dbo
         public string Title { get; set; }
 
         public ICollection<Activity> Activity { get; set; }
+
+        public string Text { get; set; }
     }
 }

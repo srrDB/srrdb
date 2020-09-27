@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using srrdb.dbo.Account;
 
@@ -25,5 +26,11 @@ namespace srrdb.dbo
 
         public int ReleaseId { get; set; }
         public virtual Release Release { get; set; }
+
+        public ICollection<SrrFileArchive> SrrFileArchive { get; set; }
+
+        public ICollection<SrrFileRar> SrrFileRar { get; set; }
+
+        public ICollection<SrrFileStore> SrrFileStore { get; set; }
     }
 }

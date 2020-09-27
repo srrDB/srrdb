@@ -78,6 +78,12 @@ namespace srrdb
             builder.Entity<Release>()
                 .HasIndex(u => u.Title)
                 .IsUnique();
+
+            builder.Entity<Release>()
+                .HasOne(a => a.Srr)
+                .WithOne(a => a.Release)
+                .HasForeignKey<Release>(c => c.SrrId);
+                //.HasForeignKey<Srr>(c => c.ReleaseId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
