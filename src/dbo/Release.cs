@@ -19,8 +19,6 @@ namespace srrdb.dbo
         public string ImdbId { get; set; }
 
         //relations
-        public int? SrrId { get; set; }
-
         [JsonIgnore]
         public Srr Srr { get; set; }
 

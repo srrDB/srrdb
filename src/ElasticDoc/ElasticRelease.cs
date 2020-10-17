@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Nest;
 using srrdb.dbo;
 
 namespace srrdb.ElasticDoc
@@ -53,5 +51,46 @@ namespace srrdb.ElasticDoc
             return new Release();
         }
 
+        public static void CreateIndex(IElasticClient client)
+        {
+            //client.Indices.DeleteAsync("release").Result;
+            //client.Indices.GetAsync(new GetIndexRequest(Indices.All)).Result;
+
+            CreateIndexResponse createIndexResponse = client.Indices.Create("release", c => c
+                .Settings(s => s
+                    .Analysis(a => a
+                        .Analyzers(aa => aa
+                            .Custom("rlsname_analyzer", ca => ca
+                                .Tokenizer("rlsname_tokenizer")
+                                .Filters("lowercase")
+                            )
+                        )
+                        .Tokenizers(at => at
+                            .Pattern("rlsname_tokenizer", pt => pt
+                                .Pattern("[^A-Za-z0-9]+"))
+                        )
+                        .Normalizers(an => an
+                            .Custom("lowercase_normalizer", cn => cn
+                                .CharFilters()
+                                .Filters("lowercase"))
+                        )
+                    )
+                )
+                .Map<ElasticRelease>(mm => mm
+                    .Properties(p => p
+                        .Text(t => t
+                            .Name(n => n.Title)
+                            .Analyzer("rlsname_analyzer")
+                            .Fields(tf => tf
+                                .Keyword(kw => kw
+                                    .Name("keyword")
+                                    .Normalizer("lowercase_normalizer")
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
     }
 }
