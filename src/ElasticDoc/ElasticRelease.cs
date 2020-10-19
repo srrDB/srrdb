@@ -28,8 +28,11 @@ namespace srrdb.ElasticDoc
         public string Tag { get; set; }
     }
 
+    [ElasticsearchType(IdProperty = nameof(Id))]
     public class ElasticRelease
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public bool HasSrr { get; set; }
@@ -48,6 +51,7 @@ namespace srrdb.ElasticDoc
 
         public static implicit operator Release(ElasticRelease er)
         {
+            //TODO
             return new Release();
         }
 

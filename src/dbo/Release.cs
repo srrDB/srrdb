@@ -34,6 +34,7 @@ namespace srrdb.dbo
 
             ElasticRelease elasticRelease = new ElasticRelease
             {
+                Id = release.Id,
                 Title = release.Title,
                 HasSrr = hasSrr,
                 ImdbId = release.ImdbId,
