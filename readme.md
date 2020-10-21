@@ -21,6 +21,7 @@ First, start by running the following SQL commands to create the required user f
 Open up cmd in the "src" directory and run the following command:
 
 - dotnet tool install --global dotnet-ef
+- dotnet tool update --global dotnet-ef
 
 To create the migration and generate the tables automatically run the following commands:
 

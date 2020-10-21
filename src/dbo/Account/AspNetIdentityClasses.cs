@@ -8,10 +8,16 @@ namespace srrdb.dbo.Account
     {
         public DateTime RegistrationAt { get; set; } = DateTime.Now;
 
+        public string OldPasswordHash { get; set; }
+
+        public string OldPasswordSalt { get; set; }
+
         //relations
         public ICollection<Srr> Srr { get; set; }
 
         public ICollection<Activity> Activity { get; set; }
+
+        public ICollection<UserPasswordRecovery> UserPasswordRecovery { get; set; }
     }
 
     public class ApplicationRole : IdentityRole<int>

@@ -15,5 +15,11 @@ namespace srrdb.dbo
 
         [MaxLength(39)]
         public string TTH { get; set; }
+
+        public virtual SrrFileStore SrrFileStore { get; set; }
+
+        public virtual SrrFileRar SrrFileRar { get; set; }
+
+        public virtual SrrFileArchive SrrFileArchive { get; set; }
     }
 }

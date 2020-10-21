@@ -6,9 +6,9 @@
 
         //relations
         public int FileId { get; set; }
-        public File File { get; set; }
+        public virtual File File { get; set; }
 
         public int SrrId { get; set; }
-        public Srr Srr { get; set; }
+        public virtual Srr Srr { get; set; }
     }
 }

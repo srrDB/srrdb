@@ -22,7 +22,7 @@ namespace srrdb.dbo
         //relations
 
         public int? UploadedById { get; set; }
-        public ApplicationUser UploadedBy { get; set; }
+        public virtual ApplicationUser UploadedBy { get; set; }
 
         public int ReleaseId { get; set; }
         public virtual Release Release { get; set; }

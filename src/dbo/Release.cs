@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using srrdb.ElasticDoc;
 
@@ -20,7 +21,7 @@ namespace srrdb.dbo
 
         //relations
         [JsonIgnore]
-        public Srr Srr { get; set; }
+        public virtual Srr Srr { get; set; }
 
         [JsonIgnore]
         public ICollection<ReleaseTag> ReleaseTag { get; set; }
@@ -37,6 +38,8 @@ namespace srrdb.dbo
                 Id = release.Id,
                 Title = release.Title,
                 HasSrr = hasSrr,
+                SrrHasNfo = hasSrr ? release.Srr.HasNfo : false,
+                SrrHasSrs = hasSrr ? release.Srr.HasSrs : false,
                 ImdbId = release.ImdbId,
                 Activity = (release.Activity ?? new List<Activity>()).Select(x => new ElasticActivity
                 {

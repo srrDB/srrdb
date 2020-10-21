@@ -29,6 +29,7 @@ namespace srrdb
         public DbSet<ReleaseTag> ReleaseTag { get; set; }
         public DbSet<Activity> Activity { get; set; }
         public DbSet<ActivityType> ActivityType { get; set; }
+        public DbSet<UserPasswordRecovery> UserPasswordRecovery { get; set; }
 
         //srr/file relations
         public DbSet<SrrFileArchive> SrrFileArchive { get; set; }
