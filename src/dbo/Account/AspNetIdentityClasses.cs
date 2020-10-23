@@ -18,6 +18,8 @@ namespace srrdb.dbo.Account
         public ICollection<Activity> Activity { get; set; }
 
         public ICollection<UserPasswordRecovery> UserPasswordRecovery { get; set; }
+
+        public int AnonymousSetting { get; set; } = 0; //0 = default, 1 = anonymous, 2 = extreme
     }
 
     public class ApplicationRole : IdentityRole<int>
