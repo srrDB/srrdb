@@ -19,6 +19,8 @@ namespace srrdb.dbo.Account
 
         public ICollection<UserPasswordRecovery> UserPasswordRecovery { get; set; }
 
+        public ICollection<Download> Download { get; set; }
+
         public int AnonymousSetting { get; set; } = 0; //0 = default, 1 = anonymous, 2 = extreme
     }
 

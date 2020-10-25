@@ -20,15 +20,15 @@ namespace srrdb.dbo
         public string ImdbId { get; set; }
 
         //relations
-        [JsonIgnore]
         public virtual Srr Srr { get; set; }
 
-        [JsonIgnore]
         public ICollection<ReleaseTag> ReleaseTag { get; set; }
 
-        [JsonIgnore]
         public ICollection<Activity> Activity { get; set; }
 
+        public ICollection<Download> Download { get; set; }
+
+        //elastic
         public static explicit operator ElasticRelease(Release release)
         {
             bool hasSrr = release.Srr != null;
@@ -37,9 +37,11 @@ namespace srrdb.dbo
             {
                 Id = release.Id,
                 Title = release.Title,
+
                 HasSrr = hasSrr,
                 SrrHasNfo = hasSrr ? release.Srr.HasNfo : false,
                 SrrHasSrs = hasSrr ? release.Srr.HasSrs : false,
+
                 ImdbId = release.ImdbId,
                 Activity = (release.Activity ?? new List<Activity>()).Select(x => new ElasticActivity
                 {

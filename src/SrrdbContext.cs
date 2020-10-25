@@ -22,19 +22,18 @@ namespace srrdb
         {
         }
 
-        public DbSet<Release> Release { get; set; }
-        public DbSet<Srr> Srr { get; set; }
-        public DbSet<File> File { get; set; }
-        public DbSet<Tag> Tag { get; set; }
-        public DbSet<ReleaseTag> ReleaseTag { get; set; }
         public DbSet<Activity> Activity { get; set; }
         public DbSet<ActivityType> ActivityType { get; set; }
-        public DbSet<UserPasswordRecovery> UserPasswordRecovery { get; set; }
-
-        //srr/file relations
+        public DbSet<Download> Download { get; set; }
+        public DbSet<File> File { get; set; }
+        public DbSet<Release> Release { get; set; }
+        public DbSet<ReleaseTag> ReleaseTag { get; set; }
+        public DbSet<Srr> Srr { get; set; }
         public DbSet<SrrFileArchive> SrrFileArchive { get; set; }
         public DbSet<SrrFileRar> SrrFileRar { get; set; }
         public DbSet<SrrFileStore> SrrFileStore { get; set; }
+        public DbSet<Tag> Tag { get; set; }
+        public DbSet<UserPasswordRecovery> UserPasswordRecovery { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -76,14 +75,13 @@ namespace srrdb
             builder.Entity<ApplicationUserToken>(entity => entity.HasKey(x => x.UserId));
 
             //custom
-            builder.Entity<Release>()
-                .HasIndex(u => u.Title)
-                .IsUnique();
+            builder.Entity<Release>().HasIndex(u => u.Title).IsUnique();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             //required to run "dotnet ef" commands
+            //TODO: use appsettings.json for the connection string
             options.UseMySql("Server=192.168.1.101;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", mysqlOptions => mysqlOptions.ServerVersion(new ServerVersion(new Version(5, 5, 59), ServerType.MySql)));
         }
     }
