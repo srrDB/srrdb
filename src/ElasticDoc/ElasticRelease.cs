@@ -3,6 +3,7 @@ using srrdb.dbo;
 
 namespace srrdb.ElasticDoc
 {
+    //stored, rared, archived file
     public class ElasticFile
     {
         public string FileName { get; set; }
