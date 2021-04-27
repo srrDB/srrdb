@@ -2,9 +2,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Pomelo.EntityFrameworkCore.MySql.Storage;
 
 using srrdb.dbo.Account;
 using srrdb.dbo;
@@ -82,7 +80,9 @@ namespace srrdb
         {
             //required to run "dotnet ef" commands
             //TODO: use appsettings.json for the connection string
-            options.UseMySql("Server=192.168.1.101;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", mysqlOptions => mysqlOptions.ServerVersion(new ServerVersion(new Version(5, 5, 59), ServerType.MySql)));
+            options.UseMySql("Server=192.168.1.101;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", new MySqlServerVersion(new Version(5, 5, 62)), mysqlOptions => mysqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend))
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors();
         }
     }
 }
