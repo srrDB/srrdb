@@ -12,7 +12,7 @@ namespace srrdb.ElasticDoc
 
         public uint Crc32 { get; set; } //int format
 
-        public string TTH { get; set; }
+        public string TTH { get; set; } //https://en.wikipedia.org/wiki/Tiger_(hash_function)
     }
 
     public class ElasticActivity

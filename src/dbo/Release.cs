@@ -54,30 +54,30 @@ namespace srrdb.dbo
             if (hasSrr)
             {
                 elasticRelease.StoredFiles = release.Srr.SrrFileStore.Select(x => new ElasticFile
-                    {
-                        FileName = x.File.FileName,
-                        FileSize = x.File.FileSize,
-                        Crc32 = x.File.Crc32,
-                        TTH = x.File.TTH
-                    }
+                {
+                    FileName = x.File.FileName,
+                    FileSize = x.File.FileSize,
+                    Crc32 = x.File.Crc32,
+                    TTH = x.File.TTH
+                }
                 ).ToArray();
 
                 elasticRelease.RarFiles = release.Srr.SrrFileRar.Select(x => new ElasticFile
-                    {
-                        FileName = x.File.FileName,
-                        FileSize = x.File.FileSize,
-                        Crc32 = x.File.Crc32,
-                        TTH = x.File.TTH
-                    }
+                {
+                    FileName = x.File.FileName,
+                    FileSize = x.File.FileSize,
+                    Crc32 = x.File.Crc32,
+                    TTH = x.File.TTH
+                }
                 ).ToArray();
 
                 elasticRelease.ArchivedFiles = release.Srr.SrrFileArchive.Select(x => new ElasticFile
-                    {
-                        FileName = x.File.FileName,
-                        FileSize = x.File.FileSize,
-                        Crc32 = x.File.Crc32,
-                        TTH = x.File.TTH
-                    }
+                {
+                    FileName = x.File.FileName,
+                    FileSize = x.File.FileSize,
+                    Crc32 = x.File.Crc32,
+                    TTH = x.File.TTH
+                }
                 ).ToArray();
             }
 

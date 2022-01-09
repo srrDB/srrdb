@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 using srrdb.dbo.Account;
@@ -33,54 +34,57 @@ namespace srrdb
         public DbSet<Tag> Tag { get; set; }
         public DbSet<UserPasswordRecovery> UserPasswordRecovery { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
             //all these needed to fix the 767 limit (mysql)?
             //https://www.codeproject.com/articles/1167050/running-your-first-asp-net-core-web-app-with-mysql
-            builder.Entity<ApplicationUser>(entity => entity.Property(m => m.Id).HasMaxLength(128));
-            builder.Entity<ApplicationUser>(entity => entity.Property(m => m.NormalizedEmail).HasMaxLength(128));
-            builder.Entity<ApplicationUser>(entity => entity.Property(m => m.NormalizedUserName).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUser>(entity => entity.Property(m => m.Id).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUser>(entity => entity.Property(m => m.NormalizedEmail).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUser>(entity => entity.Property(m => m.NormalizedUserName).HasMaxLength(128));
 
-            builder.Entity<ApplicationRole>(entity => entity.Property(m => m.Id).HasMaxLength(128));
-            builder.Entity<ApplicationRole>(entity => entity.Property(m => m.NormalizedName).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationRole>(entity => entity.Property(m => m.Id).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationRole>(entity => entity.Property(m => m.NormalizedName).HasMaxLength(128));
 
-            builder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(128));
-            builder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.ProviderKey).HasMaxLength(128));
-            builder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.ProviderKey).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserLogin>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
 
-            builder.Entity<ApplicationUserRole>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
-            builder.Entity<ApplicationUserRole>(entity => entity.Property(m => m.RoleId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserRole>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserRole>(entity => entity.Property(m => m.RoleId).HasMaxLength(128));
 
-            builder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
-            builder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(128));
-            builder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.Name).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.LoginProvider).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserToken>(entity => entity.Property(m => m.Name).HasMaxLength(128));
 
-            builder.Entity<ApplicationUserClaim>(entity => entity.Property(m => m.Id).HasMaxLength(128));
-            builder.Entity<ApplicationUserClaim>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserClaim>(entity => entity.Property(m => m.Id).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationUserClaim>(entity => entity.Property(m => m.UserId).HasMaxLength(128));
 
-            builder.Entity<ApplicationRoleClaim>(entity => entity.Property(m => m.Id).HasMaxLength(128));
-            builder.Entity<ApplicationRoleClaim>(entity => entity.Property(m => m.RoleId).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationRoleClaim>(entity => entity.Property(m => m.Id).HasMaxLength(128));
+            modelBuilder.Entity<ApplicationRoleClaim>(entity => entity.Property(m => m.RoleId).HasMaxLength(128));
 
             //define keys
-            builder.Entity<ApplicationUser>(entity => entity.HasKey(x => x.Id));
-            builder.Entity<ApplicationRole>(entity => entity.HasKey(x => x.Id));
-            builder.Entity<ApplicationUserRole>(entity => entity.HasKey(x => new { x.RoleId, x.UserId }));
-            builder.Entity<ApplicationUserLogin>(entity => entity.HasKey(x => new { x.ProviderKey, x.LoginProvider }));
-            builder.Entity<ApplicationRoleClaim>(entity => entity.HasKey(x => x.Id));
-            builder.Entity<ApplicationUserClaim>(entity => entity.HasKey(x => x.Id));
-            builder.Entity<ApplicationUserToken>(entity => entity.HasKey(x => x.UserId));
+            modelBuilder.Entity<ApplicationUser>(entity => entity.HasKey(x => x.Id));
+            modelBuilder.Entity<ApplicationRole>(entity => entity.HasKey(x => x.Id));
+            modelBuilder.Entity<ApplicationUserRole>(entity => entity.HasKey(x => new { x.RoleId, x.UserId }));
+            modelBuilder.Entity<ApplicationUserLogin>(entity => entity.HasKey(x => new { x.ProviderKey, x.LoginProvider }));
+            modelBuilder.Entity<ApplicationRoleClaim>(entity => entity.HasKey(x => x.Id));
+            modelBuilder.Entity<ApplicationUserClaim>(entity => entity.HasKey(x => x.Id));
+            modelBuilder.Entity<ApplicationUserToken>(entity => entity.HasKey(x => x.UserId));
 
             //custom
-            builder.Entity<Release>().HasIndex(u => u.Title).IsUnique();
+            modelBuilder.Entity<Release>().HasIndex(u => u.Title).IsUnique();
+
+            //mysql charset
+            modelBuilder.HasCharSet("utf8mb4", DelegationModes.ApplyToDatabases);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             //required to run "dotnet ef" commands
             //TODO: use appsettings.json for the connection string
-            options.UseMySql("Server=192.168.1.101;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", new MySqlServerVersion(new Version(5, 5, 62)), mysqlOptions => mysqlOptions.CharSetBehavior(CharSetBehavior.NeverAppend))
+            options.UseMySql("Server=192.168.2.4;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", new MySqlServerVersion(new Version(5, 5, 62)))
                     .EnableSensitiveDataLogging()
                     .EnableDetailedErrors();
         }
