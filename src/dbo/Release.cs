@@ -17,7 +17,11 @@ namespace srrdb.dbo
         public string Title { get; set; } //release name, unique
 
         [StringLength(10)]
-        public string ImdbId { get; set; }
+        public string ImdbId { get; set; } //TODO: remove and use ExternalMedia instead?
+
+        public int ExternalMediaId { get; set; }
+
+        public virtual ExternalMedia ExternalMedia { get; set; }
 
         //relations
         public virtual Srr Srr { get; set; }
@@ -38,7 +42,8 @@ namespace srrdb.dbo
                 Id = release.Id,
                 Title = release.Title,
 
-                HasSrr = hasSrr,
+                //HasSrr = hasSrr,
+                SrrId = hasSrr ? release.Srr.Id : null,
                 SrrHasNfo = hasSrr ? release.Srr.HasNfo : false,
                 SrrHasSrs = hasSrr ? release.Srr.HasSrs : false,
 

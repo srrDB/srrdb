@@ -24,9 +24,12 @@ namespace srrdb
         public DbSet<Activity> Activity { get; set; }
         public DbSet<ActivityType> ActivityType { get; set; }
         public DbSet<Download> Download { get; set; }
+        public DbSet<ExternalMedia> ExternalMedia { get; set; }
+        public DbSet<ExternalSite> ExternalSite { get; set; }
         public DbSet<File> File { get; set; }
         public DbSet<Release> Release { get; set; }
         public DbSet<ReleaseTag> ReleaseTag { get; set; }
+        public DbSet<Report> Report { get; set; }
         public DbSet<Srr> Srr { get; set; }
         public DbSet<SrrFileArchive> SrrFileArchive { get; set; }
         public DbSet<SrrFileRar> SrrFileRar { get; set; }

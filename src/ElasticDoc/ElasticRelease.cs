@@ -36,7 +36,9 @@ namespace srrdb.ElasticDoc
 
         public string Title { get; set; }
 
-        public bool HasSrr { get; set; }
+        //public bool HasSrr { get; set; }
+
+        public int? SrrId { get; set; }
 
         public bool SrrHasNfo { get; set; }
 
@@ -60,11 +62,14 @@ namespace srrdb.ElasticDoc
             return new Release();
         }
 
+        public static void DeleteIndex(IElasticClient client)
+        {
+            client.Indices.Delete("release");
+            //client.Indices.GetAsync(new GetIndexRequest(Indices.All)).Result;
+        }
+
         public static void CreateIndex(IElasticClient client)
         {
-            //client.Indices.DeleteAsync("release").Result;
-            //client.Indices.GetAsync(new GetIndexRequest(Indices.All)).Result;
-
             CreateIndexResponse createIndexResponse = client.Indices.Create("release", c => c
                 .Settings(s => s
                     .Analysis(a => a
