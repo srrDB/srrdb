@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ${{ github.workspace }}\src\srrdb.csproj
+      run: dotnet restore ${{ github.workspace }}/src/srrdb.csproj
     - name: Build
-      run: dotnet build --no-restore ${{ github.workspace }}\src\srrdb.csproj
+      run: dotnet build --no-restore ${{ github.workspace }}/src/srrdb.csproj
 
