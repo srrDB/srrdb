@@ -44,6 +44,8 @@ namespace srrdb.ElasticDoc
 
         public bool SrrHasSrs { get; set; }
 
+        public bool IsCompressed { get; set; }
+
         public string ImdbId { get; set; }
 
         public ElasticFile[] StoredFiles { get; set; }

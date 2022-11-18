@@ -19,9 +19,7 @@ namespace srrdb.dbo
         [StringLength(10)]
         public string ImdbId { get; set; } //TODO: remove and use ExternalMedia instead?
 
-        public int ExternalMediaId { get; set; }
-
-        public virtual ExternalMedia ExternalMedia { get; set; }
+        public ICollection<ExternalMedia> ExternalMedia { get; set; }
 
         //relations
         public virtual Srr Srr { get; set; }
@@ -46,7 +44,7 @@ namespace srrdb.dbo
                 SrrId = hasSrr ? release.Srr.Id : null,
                 SrrHasNfo = hasSrr ? release.Srr.HasNfo : false,
                 SrrHasSrs = hasSrr ? release.Srr.HasSrs : false,
-
+                IsCompressed = hasSrr ? release.Srr.IsCompressed : false,
                 ImdbId = release.ImdbId,
                 Activity = (release.Activity ?? new List<Activity>()).Select(x => new ElasticActivity
                 {

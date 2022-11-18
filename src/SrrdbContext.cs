@@ -2,15 +2,13 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Storage;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 using srrdb.dbo.Account;
 using srrdb.dbo;
 
-
 namespace srrdb
 {
+    //context for a potential new/rewrite of the site
     public class SrrdbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>
     {
         public SrrdbContext() : base()

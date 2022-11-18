@@ -1,12 +1,14 @@
 # srrdb (database)
 
 ## Introduction
-This is an idea of how the structure for srrdb could be
+This is an idea of how the structure for srrdb could/should be.
+
+Also includes parts of the current design (legacy).
 
 ## Requirements
-- Visual Studio 2019 Community
+- Visual Studio 2022 Community
     - "ASP.NET and web development"
-- .NET Core SDK 3.1.301
+- .NET 6 SDK (included in Visual Studio)
 - MySQL 5.5.62+
 
 ## Installation
@@ -28,4 +30,3 @@ To create the migration and generate the tables automatically run the following 
 
 - ``dotnet ef migrations add InitialCreate``
 - ``dotnet ef database update``
-
