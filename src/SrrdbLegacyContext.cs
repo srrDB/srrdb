@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using srrdb.dbo.Models.Legacy;
+using srrdb.dbo.Legacy;
 
 namespace srrdb.dbo
 {
@@ -23,11 +23,17 @@ namespace srrdb.dbo
         {
         }
 
-        public DbSet<Models.Legacy.Srr> Srr { get; set; }
+        public DbSet<Legacy.Srr> Srr { get; set; }
 
-        public DbSet<Models.Legacy.Download> Download { get; set; }
+        public DbSet<Legacy.Download> Download { get; set; }
 
-        public DbSet<Models.Legacy.Add> Add { get; set; }
+        public DbSet<Legacy.Add> Add { get; set; }
+
+        public DbSet<Legacy.StoreFile> StoreFile { get; set; }
+
+        public DbSet<Legacy.StoreFileExtra> StoreFileExtra { get; set; }
+
+        public DbSet<Legacy.Suggestion> Suggestion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace srrdb.dbo.Models.Legacy
+namespace srrdb.dbo.Legacy
 {
     [Table("download")]
     public class Download

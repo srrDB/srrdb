@@ -11,7 +11,7 @@ namespace srrdb
     {
         public static string SrrFileFullPath(string releaseName)
         {
-            return SrrFileFullPath(releaseName) + releaseName + ".srr";
+            return SrrFilePathOnly(releaseName) + releaseName + ".srr";
         }
 
         public static string SrrFilePathOnly(string releaseName)

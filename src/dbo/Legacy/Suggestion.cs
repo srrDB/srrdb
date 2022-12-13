@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace srrdb.dbo.Legacy
 {
-    [Table("add")]
-    public class Add
+    [Table("suggestion")]
+    public class Suggestion
     {
         [Key]
         [Column("fldID")]
@@ -17,7 +17,7 @@ namespace srrdb.dbo.Legacy
         public string Filename { get; set; }
 
         [Column("fldFilesize")]
-        public string Filesize { get; set; } //TODO: change to int!!!
+        public int Filesize { get; set; }
 
         [Column("fldBy")]
         public int? AddedBy { get; set; }

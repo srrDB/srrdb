@@ -1,32 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace srrdb.dbo.Legacy
 {
-    [Table("add")]
-    public class Add
+    [Table("store_file")]
+    public class StoreFile
     {
         [Key]
         [Column("fldID")]
         public int Id { get; set; }
 
         [Column("fldName")]
-        public string Title { get; set; }
+        public string Title {  get; set; }
 
         [Column("fldFilename")]
-        public string Filename { get; set; }
+        public string Filename {  get; set; }
 
         [Column("fldFilesize")]
-        public string Filesize { get; set; } //TODO: change to int!!!
-
-        [Column("fldBy")]
-        public int? AddedBy { get; set; }
+        public UInt64 Filesize { get; set; }
 
         [Column("fldCRC")]
         public string CRC { get; set; }
-
-        [Column("fldNote")]
-        public string? Note { get; set; }
 
         [Column("fldVerifiedSample")]
         public int? fldVerifiedSample { get; set; } //nullable bool
@@ -50,12 +46,17 @@ namespace srrdb.dbo.Legacy
         }
 
         [Column("fldRealFilename")]
-        public string? RealFilename { get; set; }
+        public string? RealFilename {  get; set; }
 
         [Column("fldRealFilesize")]
-        public ulong? RealFilesize { get; set; }
+        public ulong? RealFileSize { get; set; }
 
         [Column("fldRealCRC")]
-        public string? RealCRC { get; set; }
+        public string RealCRC {  get; set; }
+
+        [Column("fldRealTTH")]
+        public string RealTTH {  get; set; }
+
+        public List<StoreFileExtra> StoreFileExtra { get; set; }  
     }
 }
