@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 using srrdb.dbo.Account;
 using srrdb.dbo;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace srrdb
 {
@@ -24,7 +26,7 @@ namespace srrdb
         public DbSet<Download> Download { get; set; }
         public DbSet<ExternalMedia> ExternalMedia { get; set; }
         public DbSet<ExternalSite> ExternalSite { get; set; }
-        public DbSet<File> File { get; set; }
+        public DbSet<srrdb.dbo.File> File { get; set; }
         public DbSet<Release> Release { get; set; }
         public DbSet<ReleaseTag> ReleaseTag { get; set; }
         public DbSet<Report> Report { get; set; }
@@ -83,11 +85,15 @@ namespace srrdb
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            //required to run "dotnet ef" commands
-            //TODO: use appsettings.json for the connection string
-            options.UseMySql("Server=192.168.2.4;Database=srrdb2.0;Uid=srrdb2user;Pwd=123456;", new MySqlServerVersion(new Version(5, 5, 62)))
-                    .EnableSensitiveDataLogging()
-                    .EnableDetailedErrors();
+            IConfigurationBuilder builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false);
+            IConfiguration config = builder.Build();
+
+            string connectionString = config.GetSection("ConnectionStrings")["Srrdb2.0"];
+
+            //required to run "dotnet ef" commands or inside a console application
+            options.UseSqlServer(connectionString);
         }
     }
 }

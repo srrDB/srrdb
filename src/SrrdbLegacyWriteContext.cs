@@ -28,7 +28,7 @@ namespace srrdb.dbo
                 .AddJsonFile("config.json", optional: false);
             IConfiguration config = builder.Build();
 
-            string connectionString = config.GetSection("ConnectionStrings")["DefaultConnection"];
+            string connectionString = config.GetSection("ConnectionStrings")["WriteConnection"];
 
             //required to run "dotnet ef" commands or inside a console application
             options.UseMySql(connectionString, new MySqlServerVersion(new Version(5, 5, 62)));

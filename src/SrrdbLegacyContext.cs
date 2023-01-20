@@ -27,7 +27,7 @@ namespace srrdb.dbo
 
         public DbSet<Legacy.Download> Download { get; set; }
 
-        public DbSet<Legacy.Add> Add { get; set; }
+        public DbSet<Legacy.Add> Addd { get; set; }
 
         public DbSet<Legacy.StoreFile> StoreFile { get; set; }
 
@@ -44,7 +44,7 @@ namespace srrdb.dbo
         {
             IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("config.json", optional: false);
+                .AddJsonFile("appsettings.json", optional: false);
             IConfiguration config = builder.Build();
 
             string connectionString = config.GetSection("ConnectionStrings")["DefaultConnection"];
